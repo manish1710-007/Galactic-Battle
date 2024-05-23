@@ -45,9 +45,14 @@
         <canvas id="gameCanvas"></canvas>
     </div>
     <button id="restartButton" onclick="restartGame()">Restart</button>
+    <audio id="spaceMusic" loop>
+        <source src="deep-space.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
     <script>
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
+        const spaceMusic = document.getElementById('spaceMusic');
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -71,6 +76,7 @@
             gameOver = false;
 
             document.getElementById('restartButton').style.display = 'none';
+            spaceMusic.play();
         }
 
         function createAsteroid() {
@@ -176,6 +182,7 @@
                 if (Math.hypot(spaceship.x - asteroid.x, spaceship.y - asteroid.y) < asteroid.size) {
                     gameOver = true;
                     document.getElementById('restartButton').style.display = 'block';
+                    spaceMusic.pause();
                 }
             });
         }
